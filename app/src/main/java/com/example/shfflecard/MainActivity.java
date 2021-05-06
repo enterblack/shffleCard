@@ -3,6 +3,7 @@ package com.example.shfflecard;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     public ScrollView scrollView;
     ImageView first,second,third,fourth,fifth;
-    TextView grade;
+    TextView grade, test;
     Button changeButton;
     int[] img = {R.drawable.jan_gwang,R.drawable.jan_normal,R.drawable.feb_bird,R.drawable.feb_normal,
             R.drawable.mar_gwang,R.drawable.mar_normal,R.drawable.apr_bird,R.drawable.apr_normal,
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         changeButton = (Button) findViewById(R.id.changeButton);
         grade = (TextView) findViewById(R.id.grade);
+        test = (TextView) findViewById(R.id.test);
         changeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,11 +64,26 @@ public class MainActivity extends AppCompatActivity {
 
                 //ㅇㅋㅇㅋ 일단 족보 판정만 만들면 됨 !!!!(20210426)
                 grade.setText(shuffle[0]+" "+shuffle[1]+" "+shuffle[2]+" "+shuffle[3]+" "+shuffle[4]);
+                //0,1 1월 2,3 2월 4,5 3월 6,7 4월 8,9 5월 10,11 6월
+                //12,13 7월 14,15 8월 16,17 9월 18,19 10월
+                //2로 나누면 몫이 0,1,2,3,4,5,6,7,8,9이네
+
                 first.setImageResource(img[shuffle[0]]);
                 second.setImageResource(img[shuffle[1]]);
                 third.setImageResource(img[shuffle[2]]);
                 fourth.setImageResource(img[shuffle[3]]);
                 fifth.setImageResource(img[shuffle[4]]);
+                int[] month = {shuffle[0]/2+1 , shuffle[1]/2+1 , shuffle[2]/2+1 , shuffle[3]/2+1 , shuffle[4]/2+1};
+                test.setText(month[0] + " " +month[1] + " " +month[2] + " " +month[3] + " " +month[4]);
+
+                //여기서 해야할것은 5장 중에서 3장을 골라야한다 (무조건)
+                //조합으로 구해야된다
+                //
+                int index = 0;
+                boolean[] visit  = new boolean[month.length];
+                Combination(month, 3 ,index ,visit);
+                //그 3장의합이 만약 10의 단위라면 (10,20,30) 족보 계산 하기
+                //아니면 그냥 황 처리
 
             }
         });
@@ -81,4 +98,23 @@ public class MainActivity extends AppCompatActivity {
         }
         return array;
     }
+    public void Combination(int[] array , int select, int index , boolean[] visit){
+        if(select == 0){
+
+            return;
+        }
+        if(index == array.length){
+            return;
+        }else {
+            visit[index] = true;
+            Combination(array , select-1, index+1 , visit);
+
+            visit[index] = false;
+            Combination(array , select , index +1 , visit);
+
+        }
+
+    }
+
+
 }

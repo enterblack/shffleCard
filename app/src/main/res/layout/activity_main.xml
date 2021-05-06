@@ -50,6 +50,12 @@
         android:text="Test"
         android:id="@+id/grade"
         />
+    <TextView
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TEST2"
+        android:id="@+id/test"/>
     <Button
         android:id="@+id/changeButton"
         android:layout_width="match_parent"
