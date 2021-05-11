@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     public ScrollView scrollView;
     ImageView first,second,third,fourth,fifth;
-    TextView grade, test;
+    TextView grade, test , visitedTest;
     Button changeButton;
     int[] img = {R.drawable.jan_gwang,R.drawable.jan_normal,R.drawable.feb_bird,R.drawable.feb_normal,
             R.drawable.mar_gwang,R.drawable.mar_normal,R.drawable.apr_bird,R.drawable.apr_normal,
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         changeButton = (Button) findViewById(R.id.changeButton);
         grade = (TextView) findViewById(R.id.grade);
         test = (TextView) findViewById(R.id.test);
+        visitedTest = (TextView) findViewById(R.id.visitedTest);
         changeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,11 +81,21 @@ public class MainActivity extends AppCompatActivity {
                 //여기서 해야할것은 5장 중에서 3장을 골라야한다 (무조건)
                 //조합으로 구해야된다
                 //
-                int index = 0;
-                boolean[] visit  = new boolean[month.length];
-                Combination(month, 3 ,index ,visit);
+
+
+
                 //그 3장의합이 만약 10의 단위라면 (10,20,30) 족보 계산 하기
                 //아니면 그냥 황 처리
+
+                //visitedTest.setText(visit[0] +" "+  visit[1] +" "+ visit[2] +" "+ visit[3] +" "+ visit[4]);
+
+                //5 장중에 3장선택을 한다(2021.05.11)
+                //그 3장의 위치랑 그패들의 합을 구한다.
+                //그패들의 합이 10의 배수인지 확인한다.
+                //아니면 황처리를 하고 맞으면 나머지 패의 족보를 확인한다.
+                //(이때 족보가 2개이상 될수 있으니까 그때 String 더하기로 출력)
+                //끝!
+                //그리고 내가 안드로이드 에 맟게 다시 코딩을 해야되는 상황이다.
 
             }
         });
@@ -97,23 +109,6 @@ public class MainActivity extends AppCompatActivity {
             array[i] = temp;
         }
         return array;
-    }
-    public void Combination(int[] array , int select, int index , boolean[] visit){
-        if(select == 0){
-
-            return;
-        }
-        if(index == array.length){
-            return;
-        }else {
-            visit[index] = true;
-            Combination(array , select-1, index+1 , visit);
-
-            visit[index] = false;
-            Combination(array , select , index +1 , visit);
-
-        }
-
     }
 
 

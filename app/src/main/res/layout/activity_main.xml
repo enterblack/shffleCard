@@ -56,6 +56,12 @@
         android:layout_height="wrap_content"
         android:text="TEST2"
         android:id="@+id/test"/>
+    <TextView
+        android:textAlignment="center"
+        android:text="VisitedTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/visitedTest"/>
     <Button
         android:id="@+id/changeButton"
         android:layout_width="match_parent"
